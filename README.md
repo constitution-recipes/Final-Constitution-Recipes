@@ -1,73 +1,97 @@
-# 체질 기반 레시피 추천 플랫폼
+# 🩺🍽️ ChiDiet – 체질 기반 건강 식단 플랫폼
 
-## 프로젝트 개요
-이 프로젝트는 사용자의 체질(한의학 기반)을 진단하고, 해당 체질에 최적화된 레시피를 자동으로 생성하여 개인화된 식단 관리 및 쇼핑을 지원하는 통합 플랫폼입니다.
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"> <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white"> <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white"> <img src="https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zustand&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> <img src="https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white">
 
-## 주요 기능
-- **체질 진단 챗봇**: LLM을 활용하여 사용자의 체질을 8가지 유형으로 분류합니다.
-- **맞춤형 레시피 추천**: 체질, 선호 식재료, 알러지, 이력을 기반으로 개인화된 레시피를 추천합니다.
-- **식단 플래너 & 캘린더 연동**: 자동으로 식단을 생성하고 외부 캘린더와 연동합니다.
-- **장바구니/쇼핑리스트 자동 생성**: 추천된 레시피를 기반으로 필요한 재료를 자동으로 추출합니다.
-- **레시피 생성 시스템**: RAG 및 MCP를 활용하여 사용자 맞춤형 레시피를 생성합니다.
-- **자동 레시피 수집·생성 시스템**: 외부 사이트에서 레시피를 크롤링하고, AI를 통해 생성 및 평가합니다.
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=OpenAI&logoColor=white"> <img src="https://img.shields.io/badge/LangChain-000000?style=for-the-badge&logo=LangChain&logoColor=white"> <img src="https://img.shields.io/badge/ChromaDB-40496D?style=for-the-badge&logo=ChromaDB&logoColor=white"> <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white"> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/docker--compose-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/Uvicorn-339933?style=for-the-badge&logo=uvicorn&logoColor=white">
 
-## 서비스 파이프라인
-```mermaid
-flowchart TD
-  subgraph 사용자
-    A[사용자] -->|로그인 요청| B[FastAPI]
-  end
-  subgraph 인증
-    B -->|인증 요청| C[Spring OAuth2]
-    C -->|JWT 발급| A
-  end
-  subgraph 서비스
-    B -->|체질 진단 요청| D[LLM 호출]
-    D -->|체질 분류| E[8체질 분류]
-    E -->|추천 요청| F[맞춤형 레시피 추천]
-    F -->|식단 생성 요청| G[식단 플래너]
-    G -->|장바구니 생성 요청| H[장바구니/쇼핑리스트 생성]
-  end
-  subgraph 데이터베이스
-    F -->|레시피 저장| I[(MongoDB)]
-    G -->|식단 저장| I
-    H -->|장바구니 저장| I
-  end
-  subgraph 자동화
-    J[자동 크롤링] -->|레시피 수집| I
-    K[AI 생성 및 평가] -->|레시피 생성 및 평가| I
-  end
+---
+
+# ✅ 프로젝트 개요
+
+ChiDiet는 한의학 기반 체질 진단을 통해 사용자에게 개인화된 건강 레시피와 식단을 제안하는 웹 플랫폼입니다.  
+- **AI 데이터 파이프라인 & LLM API**: `Ai-Data`  
+- **REST API 서버**: `Backend` (FastAPI + MongoDB + WebSocket)  
+- **사용자 인터페이스**: `Frontend` (Next.js 14 App Router + Shadcn UI + Tailwind CSS)
+
+### ✔️ 주요 기능
+- 체질 진단 챗봇 (LangChain + OpenAI)  
+- 맞춤형 레시피 추천 (RAG + Agent 기반 생성/평가)  
+- 웹소켓 실시간 알림 및 업데이트  
+
+---
+
+# ✅ 프로젝트 구조
+
+```bash
+.
+├── Ai-Data
+│   ├── crawling/         # 레시피 데이터 크롤링 스크립트
+│   ├── data/             # 전처리된 CSV 데이터
+│   └── llm/              # LangChain + FastAPI LLM API
+├── Frontend
+│   ├── src/
+│   │   ├── app/          # Next.js App Router 페이지
+│   │   ├── components/   # shadcn/ui & 공통 컴포넌트
+│   │   ├── contexts/     # Zustand 전역 상태
+│   │   └── lib/          # 유틸 및 API 호출
+│   └── public/           # 정적 자산
+└── Backend
+    ├── api/              # FastAPI 라우터
+    ├── db/               # MongoDB 연결 및 초기화
+    ├── models/           # Pydantic 스키마/모델
+    ├── crud/             # CRUD 유틸리티
+    └── main.py           # FastAPI 앱 진입점
 ```
-1. **로그인 & 인증**: OAuth2 / JWT 기반으로 사용자 인증을 처리합니다.
-2. **체질 진단 챗봇**: FastAPI 백엔드에서 LLM을 호출하여 8체질로 분류합니다.
-3. **맞춤형 레시피 추천**: 체질, 선호 식재료, 알러지, 이력을 기반으로 개인화된 추천을 제공합니다.
-4. **식단 플래너 & 캘린더 연동**: 자동으로 식단을 생성하고 외부 캘린더와 연동합니다.
-5. **장바구니/쇼핑리스트 자동 생성**: 추천된 레시피를 기반으로 필요한 재료를 추출하여 장바구니를 생성합니다.
-6. **레시피 생성**: RAG 및 MCP를 활용하여 사용자 맞춤형 레시피를 생성합니다.
-7. **응답 반환 & 히스토리 저장**: 생성된 레시피, 식단, 쇼핑리스트를 React UI에 전달하고 MongoDB에 저장합니다.
-8. **자동 레시피 수집·생성 시스템**: 외부 사이트에서 주기적으로 크롤링하고, AI를 통해 생성 및 평가합니다.
-9. **Agent 기반 레시피 동적 생성**: 내부 검색 실패 시 Agent를 트리거하여 다양한 도구를 조합하여 레시피를 생성합니다.
 
-## 기술 스택
-- **백엔드**: FastAPI, Spring Boot, RabbitMQ, Celery
-- **프론트엔드**: React
-- **인프라**: Docker
-- **데이터베이스**: FAISS/Milvus, MongoDB, Redis
+---
 
-## 아키텍처
-이 프로젝트는 다양한 기술 스택을 활용하여 고성능의 개인화된 식단 관리 플랫폼을 제공합니다. RAG 및 LangChain을 통해 외부 지식베이스를 활용하며, MCP를 통해 상황별 최적화된 모델을 동적으로 선택합니다.
+# ✅ 시작하기
 
-## 개발 로드맵
-1. 로그인/인증 모듈 및 챗봇 PoC
-2. 벡터 DB 구축 및 기본 레시피 생성
-3. MCP 파이프라인 구현 및 추천/플래너/장바구니 기능 개발
-4. 자동 크롤링·생성·평가 시스템 개발
-5. Agent 기반 동적 생성 시스템 구현
-6. 모델 양자화 및 경량화
-7. UI/UX 고도화 및 CI/CD, 모니터링
+## 1. 저장소 클론
+```bash
+git clone <repository-url>
+cd constitution-recipe/web
+```
 
-## 기여 방법
-프로젝트에 기여하고 싶으신 분들은 [CONTRIBUTING.md](./CONTRIBUTING.md)를 참고해주세요.
+## 2. Ai-Data 실행
+```bash
+cd Ai-Data
+# 데이터 크롤링
+python crawling/ttrecipe_crawl.py
+python crawling/ttrecipe_crawl_multi.py
 
-## 라이선스
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](./LICENSE)를 참고하세요.
+# LLM API
+cd llm
+pip install -r requirements.txt
+cp .env.example .env  # OPENAI_API_KEY 등 설정
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+## 3. Backend 실행
+```bash
+cd ../../Backend
+pip install -r requirements.txt
+uvicorn main:app --reload --host 0.0.0.0 --port 1492
+```
+
+## 4. Frontend 실행
+```bash
+cd ../Frontend
+npm install
+npm run dev
+```
+
+---
+
+# ✅ 추가 자료
+- 프로젝트 상세 문서  
+  - Ai-Data: `Ai-Data/README.md`  
+  - Frontend: `Frontend/README.md`  
+  - Backend: `Backend/README.md`  
+- Next.js Docs: https://nextjs.org/docs  
+- Shadcn/UI Docs: https://ui.shadcn.com/docs  
+
+---
+
+# ✅ 라이선스
+이 프로젝트는 MIT 라이선스를 따릅니다.  

@@ -1,0 +1,7 @@
+# Ignore ansik_app_mvp directory
+ansik_app_mvp/ 
+node_modules/
+.next
+.env.local
+.env
+.env.local

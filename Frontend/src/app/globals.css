@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* 메인 컬러 - 한의학 컨셉을 반영한 자연친화적인 청록색 */
+  --primary: 171 60% 50%;     /* teal */
+  --primary-foreground: 0 0% 100%;
+  
+  /* 보조 컬러 - 차분한 블루 계열 */
+  --secondary: 220 60% 45%;   /* 딥 블루 */
+  --secondary-foreground: 210 40% 98%;
+  
+  /* 강조 컬러 - 밝고 따뜻한 오렌지 */
+  --accent: 45 90% 51%;      /* 오렌지 */
+  --accent-foreground: 45 50% 20%;
+  
+  /* 경고/에러 컬러 */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  
+  /* 배경 및 전경 컬러 */
+  --background: 0 0% 100%;    /* 순수 화이트 */
+  --foreground: 220 20% 25%;  /* 딥 블루그레이 */
+  
+  /* 카드 컬러 */
+  --card: 0 0% 98%;           /* 오프화이트 */
+  --card-foreground: 220 20% 25%;
+  
+  /* 팝오버 컬러 */
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 20% 25%;
+  
+  /* 뮤트 컬러 */
+  --muted: 210 16% 93%;      /* 소프트 그레이 */
+  --muted-foreground: 220 20% 40%;
+  
+  /* 보더 및 인풋 컬러 */
+  --border: 210 16% 82%;
+  --input: 210 16% 82%;
+  
+  /* 링 컬러 */
+  --ring: 171 60% 50%;
+  
+  /* 라운드 코너 */
+  --radius: 0.75rem;
+}
+
+/* 다크 모드 설정 - 미래를 위해 준비 */
+.dark {
+  --background: 220 25% 10%;
+  --foreground: 210 20% 98%;
+  
+  --card: 220 25% 13%;
+  --card-foreground: 210 20% 98%;
+  
+  --popover: 220 25% 13%;
+  --popover-foreground: 210 20% 98%;
+  
+  --primary: 171 60% 40%;
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 220 50% 35%;
+  --secondary-foreground: 210 20% 98%;
+  
+  --accent: 45 80% 51%;
+  --accent-foreground: 45 50% 20%;
+  
+  --muted: 220 25% 18%;
+  --muted-foreground: 210 20% 70%;
+  
+  --border: 220 25% 20%;
+  --input: 220 25% 20%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    font-family: 'Noto Sans KR', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased min-h-screen;
+  }
+
+  /* 헤딩 스타일 */
+  h1 {
+    @apply text-4xl font-semibold tracking-tight leading-tight;
+  }
+  
+  h2 {
+    @apply text-3xl font-semibold tracking-tight leading-tight;
+  }
+  
+  h3 {
+    @apply text-2xl font-medium tracking-tight leading-snug;
+  }
+
+  /* 본문 스타일 */
+  p {
+    @apply leading-relaxed;
+  }
+
+  /* 링크 스타일 */
+  a {
+    @apply text-primary hover:text-primary/80 transition-colors;
+  }
+
+  /* 스크롤바 스타일링 */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border hover:bg-muted-foreground/50 rounded-full transition-colors;
+  }
+}
+
+/* 커스텀 컴포넌트 스타일 */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors 
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+    disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary text-secondary-foreground hover:bg-secondary/90;
+  }
+
+  .btn-outline {
+    @apply btn border border-input hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .btn-ghost {
+    @apply btn hover:bg-accent hover:text-accent-foreground;
+  }
+
+  .input-search {
+    @apply flex h-10 w-full rounded-full px-4 py-2 bg-muted border-none text-sm 
+    ring-offset-background focus-visible:outline-none focus-visible:ring-2
+    focus-visible:ring-primary/30 focus-visible:ring-offset-2;
+  }
+
+  .card {
+    @apply rounded-lg border bg-card text-card-foreground shadow-sm p-6;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+  }
+}
+
+/* 커스텀 애니메이션 */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 0.5s ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulseSoft {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+  
+  @keyframes shake {
+    10%, 90% {
+      transform: translateX(-1px);
+    }
+    20%, 80% {
+      transform: translateX(2px);
+    }
+    30%, 50%, 70% {
+      transform: translateX(-4px);
+    }
+    40%, 60% {
+      transform: translateX(4px);
+    }
+  }
+}
+
+/* 커스텀 유틸리티 클래스 */
+@layer utilities {
+  .bg-gradient-primary {
+    @apply bg-gradient-to-b from-primary/10 via-primary/5 to-background;
+  }
+  
+  .bg-gradient-card {
+    @apply bg-gradient-to-br from-card to-background;
+  }
+
+  .bg-gradient-hero {
+    @apply bg-gradient-to-br from-secondary/20 via-primary/20 to-background;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+  
+  .shadow-card {
+    @apply shadow-lg shadow-primary/5;
+  }
+
+  .shadow-soft {
+    @apply shadow-[0_8px_30px_rgba(0,0,0,0.05)];
+  }
+
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+  
+  /* 점 패턴 배경 */
+  .bg-pattern-dots {
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  
+  .bg-pattern-grid {
+    background-image: linear-gradient(to right, currentColor 1px, transparent 1px),
+                    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+} 

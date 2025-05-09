@@ -1,0 +1,23 @@
+.env
+.env.local
+tutorial
+_pycache_
+.env
+.idea/
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+build.log
+backend-venv/
+# Ignore ansik_app_mvp directory
+ansik_app_mvp/ 
+node_modules/
+.next
+.env.local
+.env
+.env.local
