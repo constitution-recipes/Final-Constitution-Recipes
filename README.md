@@ -9,9 +9,9 @@
 # ✅ 프로젝트 개요
 
 ChiDiet는 한의학 기반 체질 진단을 통해 사용자에게 개인화된 건강 레시피와 식단을 제안하는 웹 플랫폼입니다.  
-- **AI 데이터 파이프라인 & LLM API**: `Ai-Data`  
-- **REST API 서버**: `Backend` (FastAPI + MongoDB + WebSocket)  
-- **사용자 인터페이스**: `Frontend` (Next.js 14 App Router + Shadcn UI + Tailwind CSS)
+- **AI 데이터 파이프라인 & LLM API**: `Ai-Data`  [Ai-Data Repository](https://github.com/constitution-recipes/Ai-Data)
+- **REST API 서버**: `Backend` (FastAPI + MongoDB + WebSocket)  [Backend Repository](https://github.com/constitution-recipes/Backend) 
+- **사용자 인터페이스**: `Frontend` (Next.js 14 App Router + Shadcn UI + Tailwind CSS)[Frontend Repository](https://github.com/constitution-recipes/Frontend)
 
 ### ✔️ 주요 기능
 - 체질 진단 챗봇 (LangChain + OpenAI)  
